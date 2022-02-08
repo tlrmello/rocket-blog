@@ -1,7 +1,7 @@
 #[macro_use]
 extern crate rocket;
 
-use rocket::fs::FileServer;
+use rocket::fs::{relative, FileServer};
 use rocket::http::ContentType;
 
 #[get("/")]
@@ -68,5 +68,5 @@ fn home() -> (ContentType, String) {
 fn rocket() -> _ {
     rocket::build()
         .mount("/", routes![home])
-        .mount("/image", FileServer::from("../files"))
+        .mount("/image", FileServer::from(relative!("files")))
 }
